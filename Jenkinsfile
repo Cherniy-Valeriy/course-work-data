@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/твой-репо.git'
+                git 'https://github.com/Cherniy-Valeriy/course-work-data'
             }
         }
         stage('Build Docker Image') {
