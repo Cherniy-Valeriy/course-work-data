@@ -7,6 +7,7 @@ WORKDIR /app
 # Копируем файлы приложения в контейнер
 COPY . /app
 
+RUN pip install --no-cache-dir flask pytest
 # Устанавливаем зависимости
 #RUN pip install --no-cache-dir -r requirements.txt
 #RUN pip install pytest
