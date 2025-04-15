@@ -14,41 +14,28 @@ pipeline {
             }
         }
 
-    stage('Build Docker Image') {
-    	steps {
-        	script {
-			sh 'DOCKER_BUILDKIT=1 docker build -f /home/valera/course-work-data/app/Dockerfile -t $DOCKER_IMAGE:$DOCKER_TAG .'
-			}
-		}
-	}
-
-
-     stage('Check Files') {
-     	steps {
-        	script {
-                    	// Проверяем, что тесты находятся в правильной директории на машине Jenkins
-                    	sh 'ls -alh /var/lib/jenkins/workspace/proba'
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Включаем Docker BuildKit перед сборкой
+                    sh 'DOCKER_BUILDKIT=1 docker build -t $DOCKER_IMAGE:$DOCKER_TAG .'
                 }
             }
         }
 
-     stage('Run Tests') {
-     	steps {
-        	script {
-                    	// Проверяем содержимое /app в контейнере
-                    	sh 'docker run --rm -v "$PWD":/app -w /app $DOCKER_IMAGE:$DOCKER_TAG ls -alh'
-
-                    	// Запуск тестов внутри контейнера
-                    	sh 'docker run --rm -v "$PWD":/app -w /app $DOCKER_IMAGE:$DOCKER_TAG pytest -v'
+        stage('Run Tests') {
+            steps {
+                script {
+                    // Запускаем тесты внутри контейнера
+                    sh 'docker run --rm $DOCKER_IMAGE:$DOCKER_TAG pytest'
                 }
             }
         }
-    }
-}
+
         stage('Deploy') {
             steps {
-                // Деплой на сервер, если тесты прошли успешно
                 script {
+                    // Деплой на сервер, если тесты прошли успешно
                     sh 'docker run -d -p 80:5000 $DOCKER_IMAGE:$DOCKER_TAG'
                 }
             }
