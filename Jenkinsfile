@@ -27,7 +27,7 @@ pipeline {
             steps {
                 script {
                     // Запуск тестов внутри контейнера
-                    sh 'docker run --rm -v "$PWD":/app -w /app/app $DOCKER_IMAGE:$DOCKER_TAG pytest'
+                    sh 'docker run --rm -v "$PWD":/app -w /app $DOCKER_IMAGE:$DOCKER_TAG pytest'
                 }
             }
         }
