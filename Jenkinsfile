@@ -14,14 +14,15 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                // Собираем Docker-образ
-                script {
-                    sh 'docker build -t $DOCKER_IMAGE:$DOCKER_TAG .'
-                }
-            }
-        }
+    stage('Build Docker Image') {
+    	steps {
+        	script {
+            // Включаем Docker BuildKit перед сборкой
+            sh 'DOCKER_BUILDKIT=1 docker build -t $DOCKER_IMAGE:$DOCKER_TAG .'
+        		}
+    		}
+	}
+
 
         stage('Run Tests') {
             steps {
