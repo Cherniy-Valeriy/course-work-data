@@ -9,7 +9,7 @@ COPY . /app
 
 # Устанавливаем зависимости
 #RUN pip install --no-cache-dir -r requirements.txt
-RUN pip install pytest
+#RUN pip install pytest
 # Открываем порт, на котором будет работать приложение
 EXPOSE 5000
 
