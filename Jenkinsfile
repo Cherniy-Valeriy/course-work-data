@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Клонируем репозиторий из Git
-                git 'https://github.com/Cherniy-Valeriy/course-work-data'
+                git branch: 'dev', url: 'https://github.com/Cherniy-Valeriy/course-work-data.git'
 		sh 'ls -la'
             }
         }
