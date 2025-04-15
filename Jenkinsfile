@@ -18,7 +18,16 @@ pipeline {
             steps {
                 script {
                     // Включаем Docker BuildKit перед сборкой
-                    sh 'DOCKER_BUILDKIT=1 docker build -t $DOCKER_IMAGE:$DOCKER_TAG .'
+                    sh 'DOCKER_BUILDKIT=1 docker build -t $DOCKER_IMAGE:$DOCKER_TAG -f app/Dockerfile .'
+                }
+            }
+        }
+
+	stage('Run Tests') {
+            steps {
+                script {
+                    // Запуск тестов внутри контейнера
+                    sh 'docker run --rm -v "$PWD":/app -w /app $DOCKER_IMAGE:$DOCKER_TAG pytest -v'
                 }
             }
         }
