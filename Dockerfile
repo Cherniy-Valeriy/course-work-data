@@ -2,11 +2,9 @@
 FROM python:3.12-slim
 
 # Устанавливаем рабочую директорию
-
-# Копируем файлы приложения в контейнер
-COPY . .
-
 WORKDIR /app
+# Копируем файлы приложения в контейнер
+COPY . app/
 
 RUN pip install --no-cache-dir flask pytest
 # Устанавливаем зависимости
@@ -16,4 +14,4 @@ RUN pip install --no-cache-dir flask pytest
 EXPOSE 5000
 ENV PYTHONPATH=/app
 # Запускаем приложение
-CMD ["python", "run.py", "pytest"]
+CMD ["python", "run.py"]
