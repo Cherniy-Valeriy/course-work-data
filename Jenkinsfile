@@ -23,15 +23,28 @@ pipeline {
 	}
 
 
-        stage('Run Tests') {
+stage('Check Files') {
             steps {
-                // Запуск тестов внутри контейнера
                 script {
-                    sh 'docker run --rm -v "$PWD":/app -w /app $DOCKER_IMAGE:$DOCKER_TAG pytest -v'
+                    // Проверяем, что тесты находятся в правильной директории на машине Jenkins
+                    sh 'ls -alh /var/lib/jenkins/workspace/proba'
                 }
             }
         }
 
+        stage('Run Tests') {
+            steps {
+                script {
+                    // Проверяем содержимое /app в контейнере
+                    sh 'docker run --rm -v "$PWD":/app -w /app $DOCKER_IMAGE:$DOCKER_TAG ls -alh'
+
+                    // Запуск тестов внутри контейнера
+                    sh 'docker run --rm -v "$PWD":/app -w /app $DOCKER_IMAGE:$DOCKER_TAG pytest -v'
+                }
+            }
+        }
+    }
+}
         stage('Deploy') {
             steps {
                 // Деплой на сервер, если тесты прошли успешно
