@@ -27,7 +27,7 @@ pipeline {
             steps {
                 // Запуск тестов внутри контейнера
                 script {
-                    sh 'docker run --rm $DOCKER_IMAGE:$DOCKER_TAG pytest test'
+                    sh 'docker run --rm $DOCKER_IMAGE:$DOCKER_TAG /usr/bin/pytest test'
                 }
             }
         }
