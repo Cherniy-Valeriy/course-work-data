@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . /app
 
 # Устанавливаем зависимости
-RUN pip install --no-cache-dir -r /home/valera/course-work/app/requirements.txt
+RUN pip install --no-cache-dir -r /home/valera/course-work-data/app/requirements.txt
 
 # Открываем порт, на котором будет работать приложение
 EXPOSE 5000
