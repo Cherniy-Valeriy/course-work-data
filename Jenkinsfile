@@ -20,7 +20,6 @@ pipeline {
                 script {
 		    sh 'pwd'
    		    sh 'ls -la'
-		    sh 'ls -la /var/lib/jenkins/workspace/proba/app'
                     // Включаем Docker BuildKit перед сборкой
                     sh 'DOCKER_BUILDKIT=1 docker build -f /home/valera/course-work-data/Dockerfile -t $DOCKER_IMAGE:$DOCKER_TAG .'
 			}
@@ -30,7 +29,7 @@ pipeline {
 	stage('Run Tests') {
             steps {
                 script {
-		    sh 'ls -la /var/lib/jenkins/workspace/proba/app'
+		    sh 'ls -la'
                     // Запуск тестов внутри контейнера
                     sh 'docker run --rm $DOCKER_IMAGE:$DOCKER_TAG pytest /app/tests'
                 }
