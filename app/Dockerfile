@@ -2,7 +2,7 @@
 FROM python:3.12-slim
 
 # Устанавливаем рабочую директорию
-WORKDIR /app
+WORKDIR home/valera/course-work/app
 
 # Копируем файлы приложения в контейнер
 COPY . /app
