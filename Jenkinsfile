@@ -26,7 +26,7 @@ pipeline {
 	stage('Run Tests') {
             steps {
                 script {
-		    ls -la /var/lib/jenkins/workspace/proba
+		    sh 'ls -la /var/lib/jenkins/workspace/proba'
                     // Запуск тестов внутри контейнера
                     sh 'docker run --rm -v /var/lib/jenkins/workspace/proba:/app -w /app flask:latest pytest'
                 }
