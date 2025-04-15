@@ -2,7 +2,7 @@ pipeline {
     agent any  // Использовать любой доступный агент для выполнения
 
     environment {
-        DOCKER_IMAGE = 'my-flask-app'
+        DOCKER_IMAGE = 'flask'
         DOCKER_TAG = 'latest'
     }
 
@@ -37,7 +37,7 @@ pipeline {
             steps {
                 // Деплой на сервер, если тесты прошли успешно
                 script {
-                    sh 'docker run -d -p 80:80 $DOCKER_IMAGE:$DOCKER_TAG'
+                    sh 'docker run -d -p 80:5000 $DOCKER_IMAGE:$DOCKER_TAG'
                 }
             }
         }
