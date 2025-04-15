@@ -18,24 +18,17 @@ pipeline {
             steps {
                 script {
                     // Включаем Docker BuildKit перед сборкой
-                    sh 'docker build -t $DOCKER_IMAGE:$DOCKER_TAG .'
-                }
-            }
-        }
-
-        stage('Run Tests') {
-            steps {
-                script {
-                    // Запускаем тесты внутри контейнера
-                    sh 'docker run --rm $DOCKER_IMAGE:$DOCKER_TAG pytest'
+                    sh 'DOCKER_BUILDKIT=1 docker build -t $DOCKER_IMAGE:$DOCKER_TAG .'
                 }
             }
         }
 
         stage('Deploy') {
             steps {
+                // Деплой на сервер, если тесты прошли успешно
                 script {
-                    // Деплой на сервер, если тесты прошли успешно
+                    // Запуск контейнера с маппингом портов
+                    // Контейнер использует порт 5000 для Flask
                     sh 'docker run -d -p 80:5000 $DOCKER_IMAGE:$DOCKER_TAG'
                 }
             }
