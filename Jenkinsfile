@@ -18,10 +18,10 @@ pipeline {
             steps {
                 script {
                     // Включаем Docker BuildKit перед сборкой
-                    sh 'DOCKER_BUILDKIT=1 docker build -t $DOCKER_IMAGE:$DOCKER_TAG app.Dockerfile'
-                }
-            }
-        }
+                    sh 'DOCKER_BUILDKIT=1 docker build -f /home/valera/course-work-data/app/Dockerfile -t $DOCKER_IMAGE:$DOCKER_TAG .'
+			}
+		}
+	}
 
 	stage('Run Tests') {
             steps {
