@@ -11,12 +11,15 @@ pipeline {
             steps {
                 // Клонируем репозиторий из Git
                 git 'https://github.com/Cherniy-Valeriy/course-work-data'
+		sh 'ls -la'
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 script {
+		    sh 'pwd'
+   		    sh 'ls -la'
                     // Включаем Docker BuildKit перед сборкой
                     sh 'DOCKER_BUILDKIT=1 docker build -f /home/valera/course-work-data/Dockerfile -t $DOCKER_IMAGE:$DOCKER_TAG .'
 			}
@@ -28,7 +31,7 @@ pipeline {
                 script {
 		    sh 'ls -la /var/lib/jenkins/workspace/proba/app'
                     // Запуск тестов внутри контейнера
-                    sh 'docker run --rm $DOCKER_IMAGE:$DOCKER_TAG pytest'
+                    sh 'docker run --rm $DOCKER_IMAGE:$DOCKER_TAG pytest /app/tests'
                 }
             }
         }
