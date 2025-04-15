@@ -28,7 +28,7 @@ pipeline {
                 script {
 		    sh 'ls -la /var/lib/jenkins/workspace/proba/app'
                     // Запуск тестов внутри контейнера
-                    sh 'docker run --rm -v /var/lib/jenkins/workspace/proba:/app -w /app flask:latest pytest'
+                    sh 'docker run --rm $DOCKER_IMAGE:$DOCKER_TAG pytest'
                 }
             }
         }
