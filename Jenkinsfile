@@ -23,23 +23,23 @@ pipeline {
 	}
 
 
-stage('Check Files') {
-            steps {
-                script {
-                    // Проверяем, что тесты находятся в правильной директории на машине Jenkins
-                    sh 'ls -alh /var/lib/jenkins/workspace/proba'
+     stage('Check Files') {
+     	steps {
+        	script {
+                    	// Проверяем, что тесты находятся в правильной директории на машине Jenkins
+                    	sh 'ls -alh /var/lib/jenkins/workspace/proba'
                 }
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                script {
-                    // Проверяем содержимое /app в контейнере
-                    sh 'docker run --rm -v "$PWD":/app -w /app $DOCKER_IMAGE:$DOCKER_TAG ls -alh'
+     stage('Run Tests') {
+     	steps {
+        	script {
+                    	// Проверяем содержимое /app в контейнере
+                    	sh 'docker run --rm -v "$PWD":/app -w /app $DOCKER_IMAGE:$DOCKER_TAG ls -alh'
 
-                    // Запуск тестов внутри контейнера
-                    sh 'docker run --rm -v "$PWD":/app -w /app $DOCKER_IMAGE:$DOCKER_TAG pytest -v'
+                    	// Запуск тестов внутри контейнера
+                    	sh 'docker run --rm -v "$PWD":/app -w /app $DOCKER_IMAGE:$DOCKER_TAG pytest -v'
                 }
             }
         }
