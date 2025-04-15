@@ -31,7 +31,7 @@ pipeline {
                 script {
 		    sh 'ls -la'
                     // Запуск тестов внутри контейнера
-                    sh 'docker run --rm $DOCKER_IMAGE:$DOCKER_TAG pytest'
+                    sh 'docker run --rm $DOCKER_IMAGE:$DOCKER_TAG pytest tests'
                 }
             }
         }
