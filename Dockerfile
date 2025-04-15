@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir flask pytest
 EXPOSE 5000
 ENV PYTHONPATH=/app
 # Запускаем приложение
-CMD ["python", "run.py"]
+CMD ["python3", "app/run.py"]
