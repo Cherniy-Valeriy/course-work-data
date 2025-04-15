@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     // Включаем Docker BuildKit перед сборкой
-                    sh 'DOCKER_BUILDKIT=1 docker build -t $DOCKER_IMAGE:$DOCKER_TAG .'
+                    sh 'DOCKER_BUILDKIT=1 docker build -t $DOCKER_IMAGE:$DOCKER_TAG app.Dockerfile'
                 }
             }
         }
