@@ -29,7 +29,7 @@ def calculate():
     except Exception as e:
         return f"Ошибка: {e}", 400
 
-@main.route('/power', methods=['GET', 'POST'])
+@bp.route('/power', methods=['GET', 'POST'])
 def power():
     result = None
     if request.method == 'POST':
