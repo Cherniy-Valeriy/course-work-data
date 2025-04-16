@@ -39,7 +39,7 @@ class CalculatorTestCase(unittest.TestCase):
     def test_power_calculation(self):
         response = self.app.post('/power', data=dict(base=2, exponent=3))
         self.assertEqual(response.status_code, 200)
-        self.assertIn('Результат: 8.0', response.data)
+        self.assertIn('Результат: 8.0', response.data.decode('utf-8'))
     
 if __name__ == "__main__":
     unittest.main()
