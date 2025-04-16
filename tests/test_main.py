@@ -31,6 +31,15 @@ class CalculatorTestCase(unittest.TestCase):
     def test_invalid_operation(self):
         response = self.client.post('/calculate', data={'a': 5, 'b': 3, 'operation': '^'})
         self.assertIn('Недопустимая операция', response.data.decode('utf-8'))
-        
+
+    def setUp(self):
+        self.app = create_app().test_client()
+        self.app.testing = True
+
+    def test_power_calculation(self):
+        response = self.app.post('/power', data=dict(base=2, exponent=3))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('Результат: 8.0', response.data)
+    
 if __name__ == "__main__":
     unittest.main()

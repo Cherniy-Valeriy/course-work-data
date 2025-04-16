@@ -1,0 +1,12 @@
+<!doctype html>
+<title>Power</title>
+<h1>Power Calculator</h1>
+<form method=post>
+  Base: <input type=number name=base step="any">
+  Exponent: <input type=number name=exponent step="any">
+  <input type=submit value=Calculate>
+</form>
+{% if result is not none %}
+  <h2>Result: {{ result }}</h2>
+{% endif %}
+<a href="/">Go Back</a>

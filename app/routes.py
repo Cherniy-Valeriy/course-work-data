@@ -28,3 +28,12 @@ def calculate():
 
     except Exception as e:
         return f"Ошибка: {e}", 400
+
+@main.route('/power', methods=['GET', 'POST'])
+def power():
+    result = None
+    if request.method == 'POST':
+        base = float(request.form['base'])
+        exponent = float(request.form['exponent'])
+        result = base ** exponent
+    return render_template('power.html', result=result)
