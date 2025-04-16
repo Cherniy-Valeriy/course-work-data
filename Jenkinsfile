@@ -40,9 +40,10 @@ pipeline {
             steps {
                 // Деплой на сервер, если тесты прошли успешно
                 script {
+		    sh 'docker rm -f flask_app || true' 
                     // Запуск контейнера с маппингом портов
                     // Контейнер использует порт 5000 для Flask
-                    sh 'docker run -d -p 80:5000 $DOCKER_IMAGE:$DOCKER_TAG'
+                    sh 'docker run -d -p 80:5000 --name flask_app $DOCKER_IMAGE:$DOCKER_TAG'
                 }
             }
         }
