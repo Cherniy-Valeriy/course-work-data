@@ -1,12 +1,21 @@
 <!doctype html>
-<title>Power</title>
-<h1>Power Calculator</h1>
-<form method=post>
-  Base: <input type=number name=base step="any">
-  Exponent: <input type=number name=exponent step="any">
-  <input type=submit value=Calculate>
-</form>
-{% if result is not none %}
-  <h2>Result: {{ result }}</h2>
-{% endif %}
-<a href="/">Go Back</a>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Калькулятор степени</title>
+</head>
+<body>
+    <h1>Калькулятор степени</h1>
+    <form method="post">
+        Основание: <input type="number" name="base" step="any">
+        Показатель: <input type="number" name="exponent" step="any">
+        <input type="submit" value="Вычислить">
+    </form>
+
+    {% if result is not none %}
+      <h2>Результат: {{ result }}</h2>
+    {% endif %}
+
+    <a href="/">На главную</a>
+</body>
+</html>
